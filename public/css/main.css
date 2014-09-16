@@ -1,0 +1,19 @@
+/* //// GLOBAL //// */
+body{
+  background-image: url('/img/dj2.jpg');
+  font-family: "Droid Sans", sans-serif !important;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+
+/* //// HEADER AND NAVBAR //// */
+.header{
+  color: white;
+}
+.header img{
+  margin-top: -1.75em;
+}
+.title{
+  font-size: 4em;
+}
