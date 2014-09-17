@@ -1,7 +1,7 @@
 /* //// GLOBAL //// */
 html, body{
   margin: 0;
-  padding: 0;
+  padding: 0 1em 0 1em;
   height: 100%;
 }
 
@@ -24,4 +24,24 @@ body{
   font-size: 4em;
 }
 
+/* //// MAIN BODY //// */
+#body{
+  height: 60%;
+}
+#form, #cal{
+  height: 100%;
+}
+.panel-full{
+  height: 100%;
+}
+
 /* //// CALENDAR //// */
+.dhx_cal_container{
+  height: 100%;
+}
+.dhx_cal_navline{
+  display: none;
+}
+.dhx_cal_header, .dhx_cal_data{
+  margin-top: -25px;
+}

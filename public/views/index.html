@@ -19,10 +19,27 @@
 
 <!-- load user data into angular controller -->
 <body ng-controller="mainController">
-	<div id="content">
-		<main-navbar></main-navbar>
-		<div class="centered">
-			<div ng-view></div>
+	<main-navbar></main-navbar>
+	<div class="row" id="body">
+		<div class="col-sm-4 col-lg-3" id="form">
+			<div class="panel panel-default panel-full">
+				<div class="panel-body">
+					Yo
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-8 col-lg-9" id="cal">
+			<div class="panel panel-default panel-full">
+				<div class="panel-body panel-full">
+					<div id="scheduler_here" class="dhx_cal_container">
+	          <div class="dhx_cal_navline">
+	              <div class="dhx_cal_date"></div>
+	          </div>
+	          <div class="dhx_cal_header"></div>
+	          <div class="dhx_cal_data"></div>       
+	        </div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<!-- 
@@ -46,8 +63,8 @@
 <script src="/resources/angular-route.js"></script>
 <script src="/js/filters/truncate.js"></script>
 <script src="/resources/calendar-codebase/dhtmlxscheduler.js" type="text/javascript"></script>
-<link rel="stylesheet" href="/resources/calendar-codebase/dhtmlxscheduler.css" type="text/css">
-<link rel="stylesheet" href="/resources/calendar-codebase/dhtmlxscheduler_flat.css" type="text/css">
+<link rel="stylesheet" href="/resources/calendar-codebase/dhtmlxscheduler.css" type="text/css"> <!--
+<link rel="stylesheet" href="/resources/calendar-codebase/dhtmlxscheduler_flat.css" type="text/css"> -->
 
 <!-- Angular Custom Components -->
 <script src="/js/coreModule.js"></script>
