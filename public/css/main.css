@@ -1,4 +1,10 @@
 /* //// GLOBAL //// */
+html, body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 body{
   background-image: url('/img/dj2.jpg');
   font-family: "Droid Sans", sans-serif !important;
@@ -17,3 +23,5 @@ body{
 .title{
   font-size: 4em;
 }
+
+/* //// CALENDAR //// */

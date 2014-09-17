@@ -18,7 +18,7 @@
 </head>
 
 <!-- load user data into angular controller -->
-<body ng-controller="mainController" ng-init="user= <%= JSON.stringify(user) %>">
+<body ng-controller="mainController">
 	<div id="content">
 		<main-navbar></main-navbar>
 		<div class="centered">
@@ -45,13 +45,19 @@
 <script src="/resources/bootstrap.min.js"></script>
 <script src="/resources/angular-route.js"></script>
 <script src="/js/filters/truncate.js"></script>
+<script src="/resources/calendar-codebase/dhtmlxscheduler.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/resources/calendar-codebase/dhtmlxscheduler.css" type="text/css">
+<link rel="stylesheet" href="/resources/calendar-codebase/dhtmlxscheduler_flat.css" type="text/css">
 
-<!-- Angular Components -->
+<!-- Angular Custom Components -->
 <script src="/js/coreModule.js"></script>
 <script src="/js/directives/coreDirective.js"></script>
 <script src="/js/ngRoutes.js"></script>
 <script src="/js/services/mainService.js"></script>
 <script src="/js/controllers/mainCtrl.js"></script>
+
+<!-- Custom JS -->
+<script src="/js/calendar.js"></script>
 
 </body>
 </html>
