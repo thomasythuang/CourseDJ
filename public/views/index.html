@@ -27,11 +27,29 @@
 
 	<!-- <main-navbar></main-navbar> -->
 
-	<div class="row" id="body">
+	<div class="row" id="body" ng-show="loaded">
 		<div class="col-sm-4 col-lg-3" id="form">
 			<div class="panel panel-default panel-full">
+				<div class="panel-heading">
+					Form
+				</div>
 				<div class="panel-body">
-					Yo
+					<select ng-model="term">
+						<option value="4560">2014 Fall</option>
+						<option value="4530">2014 Winter</option>
+						<option value="4540">2014 Spring</option>
+					</select>
+
+					<select ng-model="selectedSubject">
+						<option ng-repeat="subject in subjects" ng-value="subject.symbol">{{subject.name}}</option>
+					</select>
+					<select ng-model="selectedCourse" ng-show="selectedSubject">
+						<option ng-repeat="course in courses" ng-value="course.symbol">{{course.title}}</option>
+					</select>
+
+					<br>
+					<div ng-show="selectedSubject">Subject: {{selectedSubject}}</div>
+					<div ng-show="selectedCourse">Course: {{selectedCourse}}</div>
 				</div>
 			</div>
 		</div>

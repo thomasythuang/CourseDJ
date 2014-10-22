@@ -5,15 +5,36 @@
 var app = angular.module('mainController', []);
 
 app.controller('mainController', function($scope, $http){
+	$scope.loaded = false;
+	$scope.term = 4530;
 
 	var params = {
 		key: 'a3iSOsJ77pgC8BnX'
 	};
 	
-	$http.get('http://api.asg.northwestern.edu/terms/?key=a3iSOsJ77pgC8BnX')
+	$http.get('http://api.asg.northwestern.edu/subjects/?key=a3iSOsJ77pgC8BnX')
 		.success(function(data){
-			console.log(data);
-		}); 
+			//console.log(data);
+			$scope.subjects = data;
+			$scope.loaded = true;
+		})
+		.error(function(err){
+			console.log(err);
+			$scope.loaded = true;
+		});
+
+	$scope.$watch('selectedSubject', function(){
+		if ($scope.loaded){
+			$http.get('http://api.asg.northwestern.edu/courses/?key=a3iSOsJ77pgC8BnX&term=' + $scope.term + '&subject=' + $scope.selectedSubject)
+			.success(function(data){
+				//console.log(data);
+				$scope.courses = data;
+			})
+			.error(function(err){
+				console.log(err);
+			});
+		}
+	});
 
 	$scope.events = [
     { id:1, text:"Task A-12458",
@@ -24,5 +45,8 @@ app.controller('mainController', function($scope, $http){
       end_date: new Date(2014, 09, 22, 16, 0) }
   ];
 
-  
+  $scope.test = function(){
+  	console.log("test");
+  }
+
 });
