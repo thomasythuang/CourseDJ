@@ -8,19 +8,19 @@ app.directive('dhxScheduler', function() {
     template:'<div class="dhx_cal_navline" ng-transclude></div><div class="dhx_cal_header"></div><div class="dhx_cal_data"></div>',
 
     link:function ($scope, $element, $attrs, $controller){
-      //default state of the scheduler
+      // default state of the scheduler
       if (!$scope.scheduler)
         $scope.scheduler = {};
       $scope.scheduler.mode = $scope.scheduler.mode || "week";
       $scope.scheduler.date = $scope.scheduler.date || new Date();
 
-      //watch data collection, reload on changes
+      // watch data collection, reload on changes
       $scope.$watch($attrs.data, function(collection){
         scheduler.clearAll();
         scheduler.parse(collection, "json");
       }, true);
 
-      //watch mode and date
+      // watch mode and date
       $scope.$watch(function(){
         return $scope.scheduler.mode + $scope.scheduler.date.toString();
       }, function(nv, ov) {
@@ -29,17 +29,24 @@ app.directive('dhxScheduler', function() {
           scheduler.setCurrentView($scope.scheduler.date, $scope.scheduler.mode);
       }, true);
 
-      //size of scheduler
+      // size of scheduler
       $scope.$watch(function() {
         return $element[0].offsetWidth + "." + $element[0].offsetHeight;
       }, function() {
         scheduler.setCurrentView();
       });
 
-      //styling for dhtmlx scheduler
+      // styling for dhtmlx scheduler
       $element.addClass("dhx_cal_container");
 
-      //init scheduler
+      // scheduler config
+      scheduler.config.first_hour = 7;
+      scheduler.config.last_hour = 24;
+      scheduler.config.start_on_monday = false;
+      scheduler.config.dblclick_create = false;
+      scheduler.config.mark_now = true;
+
+      // init scheduler
       scheduler.init($element[0], $scope.scheduler.date, $scope.scheduler.mode);
     }
   }
