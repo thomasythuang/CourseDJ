@@ -4,8 +4,17 @@
 
 var app = angular.module('mainController', []);
 
-app.controller('mainController', function($scope){
+app.controller('mainController', function($scope, $http){
+
+	var params = {
+		key: 'a3iSOsJ77pgC8BnX'
+	};
 	
+	$http.get('http://api.asg.northwestern.edu/terms/?key=a3iSOsJ77pgC8BnX')
+		.success(function(data){
+			console.log(data);
+		}); 
+
 	$scope.events = [
     { id:1, text:"Task A-12458",
       start_date: new Date(2014, 09, 24, 9, 0),
