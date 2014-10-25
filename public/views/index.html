@@ -68,12 +68,11 @@
 								<input type="radio" ng-model="course.priority" name="priority" ng-value="2" />Preferred
 								<input type="radio" ng-model="course.priority" name="priority" ng-value="10" />Mandatory
 							</form>
-							{{course.priority}}
 						</div>
 					</div>
 					<div class="class-count">
 					<form name="count" ng-show="setList[0]">
-						<div>Amount of Classes:</div>
+						<div>Chosen Classes:</div>
 						<input type="radio" ng-model="courseCount" name="count" ng-value="3" checked="checked" />3
 						<input type="radio" ng-model="courseCount" name="count" ng-value="4" />4
 						<input type="radio" ng-model="courseCount" name="count" ng-value="5" />5

@@ -10,6 +10,8 @@ app.controller('mainController', function($scope, $http){
 	$scope.setList = [];
 	$scope.events = [];
 	$scope.courseCount = 4;
+	$scope.conflict = false;
+	var colors = ["green", "blue", "purple", "orange", "grey"];
 	
 	// GET a list of subjects 
 	$http.get('http://api.asg.northwestern.edu/subjects/?key=a3iSOsJ77pgC8BnX')
@@ -47,6 +49,7 @@ app.controller('mainController', function($scope, $http){
 			$scope.setList.push(course);
 			//console.log($scope.setList);
 		}
+		$scope.selectedCourse = false;
 	}
 
 	// Remove a course from the list of selected courses
@@ -58,35 +61,53 @@ app.controller('mainController', function($scope, $http){
 	}
 
 	$scope.remix = function(){
+		$scope.conflict = false;
+
 		$scope.events = [];
 		var chosenDates = scramble($scope.setList);
+
 		for (var i=0; i<chosenDates.length; i++){
 			var title = chosenDates[i].subject + " " + chosenDates[i].catalog_num
 			var days = parseDays(chosenDates[i].meeting_days);
+			var clr = colors[i];
 			for (var j=0; j<days.length; j++){				
 				$scope.events.push({
 					text: title,
 					start_date: makeDate(days[j], chosenDates[i].start_time),
 					end_date: makeDate(days[j], chosenDates[i].end_time),
+					color: chosenDates[i].conflicted ? "red" : clr,
 				});
 			}
 		}
-	}
 
-	$scope.test = function(){
-		
+		if ($scope.conflict)
+			alert("Careful! Two or more of your mandatory courses conflict");
 	}
 
 	function scramble(arr){
 		var chosenDates = JSON.parse(JSON.stringify(arr));
+		var mandatoryCourses = [];
 
 		for (var i=0; i<chosenDates.length; i++){
 			if (chosenDates[i].priority < 10){
 				chosenDates[i].priority = chosenDates[i].priority * Math.random();
+			}else{
+				mandatoryCourses.push(chosenDates[i]);
 			}
 		}
 		chosenDates.sort(function(a, b){return b.priority - a.priority});
 		chosenDates = chosenDates.slice(0, $scope.courseCount);
+
+		for (var i=0; i<mandatoryCourses.length; i++){
+			for (var j=0; j<mandatoryCourses.length; j++){
+				if ((i != j) && conflicted(mandatoryCourses[i], mandatoryCourses[j])) {
+					$scope.conflict = true;
+					mandatoryCourses[i].conflicted = true;
+					mandatoryCourses[j].conflicted = true;
+				}
+			}
+		}
+
 		return chosenDates;
 	}
 
@@ -134,6 +155,14 @@ app.controller('mainController', function($scope, $http){
 			default: 
 				return new Date(2014, 03, 20, 00, 00);
   	} 
+  }
+
+  // Calculate if two courses conflict
+  function conflicted(course1, course2){
+  	return (course1.start_time <= course2.end_time && course1.start_time >= course2.start_time ||
+	    course2.start_time <= course1.end_time && course2.start_time >= course1.start_time ||
+	    course1.start_time <= course2.start_time && course1.end_time >= course2.end_time ||
+	    course2.start_time <= course1.start_time && course2.end_time >= course1.end_time);
   }
 
 });
