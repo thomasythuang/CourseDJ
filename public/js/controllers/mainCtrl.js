@@ -35,11 +35,20 @@ app.controller('mainController', function($scope, $http){
 		}
 	});
 
-	$scope.$watch('selectedCourse', function(course){
-		console.log($scope.selectedCourse);
-		$scope.setList.push($scope.selectedCourse);
-		console.log($scope.setList);
-	});
+	$scope.addToSetList = function(course){
+		var i = arrayContains($scope.setList, course);
+		if (i === false){
+			$scope.setList.push(course);
+			console.log($scope.setList);
+		}
+	}
+
+	$scope.removeFromSetList = function(course){
+		var i = arrayContains($scope.setList, course);
+		if (i !== false){
+			$scope.setList.splice(i, 1);
+		}
+	}
 
 	$scope.events = [
     { id:1, text:"Task A-12458",
@@ -52,6 +61,15 @@ app.controller('mainController', function($scope, $http){
 
   $scope.test = function(){
   	console.log("test");
+  }
+
+  function arrayContains(arr, obj){
+  	for (var i=0; i < arr.length; i++){
+  		if (arr[i] == obj){
+  			return i;
+  		}
+  	}
+  	return false;
   }
 
 });
