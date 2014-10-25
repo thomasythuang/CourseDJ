@@ -1,6 +1,6 @@
 // js/controllers/mainCtrl.js
 
-// Global Controller- contains functions needed for multiple views
+// Main controller- all functionality is here
 
 var app = angular.module('mainController', []);
 
@@ -17,7 +17,6 @@ app.controller('mainController', function($scope, $http){
 	$http.get('http://api.asg.northwestern.edu/subjects/?key=a3iSOsJ77pgC8BnX')
 		.success(function(data){
 			console.log("GET");
-			//console.log(data);
 			$scope.subjects = data;
 			$scope.loaded = true;
 		})
@@ -32,7 +31,6 @@ app.controller('mainController', function($scope, $http){
 			$http.get('http://api.asg.northwestern.edu/courses/?key=a3iSOsJ77pgC8BnX&term=' + $scope.term + '&subject=' + $scope.selectedSubject.symbol)
 			.success(function(data){
 				console.log("GET");
-				//console.log(data);
 				$scope.courses = data;
 			})
 			.error(function(err){
@@ -60,6 +58,7 @@ app.controller('mainController', function($scope, $http){
 		}
 	}
 
+	// Process the selected courses and display the results
 	$scope.remix = function(){
 		$scope.conflict = false;
 
@@ -84,6 +83,7 @@ app.controller('mainController', function($scope, $http){
 			alert("Careful! Two or more of your mandatory courses conflict");
 	}
 
+	// Mix the list of selected courses and limit them to a specified amount
 	function scramble(arr){
 		var chosenDates = JSON.parse(JSON.stringify(arr));
 		var mandatoryCourses = [];

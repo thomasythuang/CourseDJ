@@ -1,6 +1,6 @@
 {
   "name": "CourseDJ",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Course Scheduling Aide",
   "main": "server.js",
   "author": "Thomas Huang",
