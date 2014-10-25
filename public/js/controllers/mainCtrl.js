@@ -8,10 +8,6 @@ app.controller('mainController', function($scope, $http){
 	$scope.loaded = false;
 	$scope.term = 4530;
 	$scope.setList = [];
-
-	var params = {
-		key: 'a3iSOsJ77pgC8BnX'
-	};
 	
 	$http.get('http://api.asg.northwestern.edu/subjects/?key=a3iSOsJ77pgC8BnX')
 		.success(function(data){
@@ -27,7 +23,7 @@ app.controller('mainController', function($scope, $http){
 
 	$scope.$watch('selectedSubject', function(){
 		if ($scope.loaded){
-			$http.get('http://api.asg.northwestern.edu/courses/?key=a3iSOsJ77pgC8BnX&term=' + $scope.term + '&subject=' + $scope.selectedSubject)
+			$http.get('http://api.asg.northwestern.edu/courses/?key=a3iSOsJ77pgC8BnX&term=' + $scope.term + '&subject=' + $scope.selectedSubject.symbol)
 			.success(function(data){
 				console.log("GET");
 				//console.log(data);
@@ -40,7 +36,8 @@ app.controller('mainController', function($scope, $http){
 	});
 
 	$scope.$watch('selectedCourse', function(course){
-		$scope.setList.push(course);
+		console.log($scope.selectedCourse);
+		$scope.setList.push($scope.selectedCourse);
 		console.log($scope.setList);
 	});
 
