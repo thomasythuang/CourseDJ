@@ -30,8 +30,8 @@
 
 	<div class="row" id="body" ng-show="loaded">
 		<div class="col-sm-4 col-lg-3" id="form">
-			<div class="class-add panel panel-default panel-full">
-				<div class="panel-heading">
+			<div class="class-add panel panel-default">
+				<div class="panel-heading form-title">
 					Pick Your Classes
 				</div>
 				<div class="panel-body">
@@ -45,15 +45,23 @@
 					<select ng-model="selectedSubject">
 						<option ng-repeat="subject in subjects" ng-value="subject.symbol">{{subject.name}}</option>
 					</select> -->
-					<select ng-model="selectedSubject" ng-options="subject.name for subject in subjects"></select>
+					<select ng-model="selectedSubject" ng-options="subject.name for subject in subjects" class="selected-sub"></select>
 					<select ng-show="selectedSubject" ng-model="selectedCourse" ng-options="course.title for course in courses"></select>
 
-					<br>
-					<div ng-show="selectedCourse">{{selectedCourse.subject}} {{selectedCourse.catalog_num}}: {{selectedCourse.title}}</div>
-					<button ng-show="selectedCourse" ng-click="addToSetList(selectedCourse)">Add!</button>
+					<div class="selected-course" ng-show="selectedCourse">{{selectedCourse.subject}} {{selectedCourse.catalog_num}}: {{selectedCourse.title}}</div>
+					<button class="add" ng-show="selectedCourse" ng-click="addToSetList(selectedCourse)">Add!</button>
+				</div>
+			</div>
+
+
+			<div class="class-add panel panel-default">
+				<div class="panel-heading form-title">
+					Classes Added
+				</div>
+				<div class="panel-body">
 					<div ng-show="setList">
 						<div ng-repeat="course in setList">
-							<span class="fa fa-close" ng-click="removeFromSetList(course)"></span>
+							<span class="fa fa-close red" ng-click="removeFromSetList(course)"></span>
 							{{course.subject}} {{course.catalog_num}}: {{course.title}}
 							<form name="priority">
 								<input type="radio" ng-model="course.priority" name="priority" ng-value="1" checked="checked" />Meh
@@ -63,19 +71,21 @@
 							{{course.priority}}
 						</div>
 					</div>
-
+					<div class="class-count">
 					<form name="count" ng-show="setList[0]">
 						<div>Amount of Classes:</div>
 						<input type="radio" ng-model="courseCount" name="count" ng-value="3" checked="checked" />3
 						<input type="radio" ng-model="courseCount" name="count" ng-value="4" />4
 						<input type="radio" ng-model="courseCount" name="count" ng-value="5" />5
 					</form>
+				</div>
 
 					<button ng-show="setList[0]" ng-click="remix()">Remix!</button>
 
 				</div>
 			</div>
 		</div>
+
 		<div class="col-sm-8 col-lg-9" id="cal">
 			<div class="panel panel-default panel-full">
 				<div class="panel-body panel-full">

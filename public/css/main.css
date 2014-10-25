@@ -10,7 +10,7 @@ body{
   font-family: "Arvo", serif !important;
   padding-left: 1em;
   padding-right: 1em;
-  font-size: 20px !important;
+  font-size: 14px !important;
 }
 
 
@@ -37,11 +37,35 @@ body{
 
 }
 
-.class-add.panel.panel-default.panel-full{
-  width: 350px;
+.form-title{
+  font-size: 20px;
+}
+
+.add-title{
+  font-size: 18px;
 }
 
 
+
+.class-add.panel.panel-default.panel-full{
+  width: 355px;
+}
+
+.red{
+  color:#ff0000;
+}
+
+.selected-sub{
+}
+
+.selected-course{
+  color: #66CD00;
+}
+
+.class-count{
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
 
 /* //// CALENDAR //// */
 .dhx_cal_container{
