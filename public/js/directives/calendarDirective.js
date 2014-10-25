@@ -12,7 +12,7 @@ app.directive('dhxScheduler', function() {
       if (!$scope.scheduler)
         $scope.scheduler = {};
       $scope.scheduler.mode = $scope.scheduler.mode || "week";
-      $scope.scheduler.date = $scope.scheduler.date || new Date();
+      $scope.scheduler.date = $scope.scheduler.date || new Date(2014, 3, 20);
 
       // watch data collection, reload on changes
       $scope.$watch($attrs.data, function(collection){
