@@ -45,6 +45,12 @@ app.directive('dhxScheduler', function() {
       scheduler.config.start_on_monday = false;
       scheduler.config.dblclick_create = false;
       scheduler.config.mark_now = true;
+      scheduler.config.drag_create = false;
+      scheduler.config.drag_move = false;
+      scheduler.config.drag_in = false;
+      scheduler.config.drag_out =false;
+      scheduler.config.day_date = "%l";
+      scheduler.config.hour_date = "%h:%i %A";
 
       // init scheduler
       scheduler.init($element[0], $scope.scheduler.date, $scope.scheduler.mode);
