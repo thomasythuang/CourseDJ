@@ -54,12 +54,23 @@
 						<div ng-repeat="course in setList">
 							<span class="fa fa-close" ng-click="removeFromSetList(course)"></span>
 							{{course.subject}} {{course.catalog_num}}: {{course.title}}
+							<form name="priority">
+								<input type="radio" ng-model="course.priority" name="priority" ng-value="1" checked="checked" />Meh
+								<input type="radio" ng-model="course.priority" name="priority" ng-value="2" />Preferred
+								<input type="radio" ng-model="course.priority" name="priority" ng-value="10" />Mandatory
+							</form>
+							{{course.priority}}
 						</div>
 					</div>
 
-					<!-- remix not implemented yet -->
+					<form name="count" ng-show="setList[0]">
+						<div>Amount of Classes:</div>
+						<input type="radio" ng-model="courseCount" name="count" ng-value="3" checked="checked" />3
+						<input type="radio" ng-model="courseCount" name="count" ng-value="4" />4
+						<input type="radio" ng-model="courseCount" name="count" ng-value="5" />5
+					</form>
+
 					<button ng-show="setList[0]" ng-click="remix()">Remix!</button>
-					<button ng-show="setList[0]" ng-click="test()">Test Remix!</button>
 
 				</div>
 			</div>
