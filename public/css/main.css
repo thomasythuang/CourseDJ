@@ -7,9 +7,10 @@ html, body{
 
 body{
   background-image: url('/img/dj2.jpg');
-  font-family: "Droid Sans", sans-serif !important;
+  font-family: "Arvo", serif !important;
   padding-left: 1em;
   padding-right: 1em;
+  font-size: 20px !important;
 }
 
 
@@ -33,7 +34,14 @@ body{
 }
 .panel-full{
   height: 100%;
+
 }
+
+.class-add.panel.panel-default.panel-full{
+  width: 350px;
+}
+
+
 
 /* //// CALENDAR //// */
 .dhx_cal_container{
