@@ -4,7 +4,7 @@
 
 var app = angular.module('mainController', []);
 
-app.controller('mainController', function($scope, $http){
+app.controller('mainController', function($scope, $http, ASG){
 	$scope.loaded = false;
 	$scope.term = 4530;
 	$scope.setList = [];
@@ -14,7 +14,7 @@ app.controller('mainController', function($scope, $http){
 	var colors = ["green", "blue", "purple", "orange", "grey"];
 	
 	// GET a list of subjects 
-	$http.get('http://api.asg.northwestern.edu/subjects/?key=a3iSOsJ77pgC8BnX')
+	ASG.getSubjects()
 		.success(function(data){
 			console.log("GET");
 			$scope.subjects = data;
@@ -28,7 +28,7 @@ app.controller('mainController', function($scope, $http){
 	// When a subject is selected, GET all the courses for that given subject
 	$scope.$watch('selectedSubject', function(){
 		if ($scope.loaded){
-			$http.get('http://api.asg.northwestern.edu/courses/?key=a3iSOsJ77pgC8BnX&term=' + $scope.term + '&subject=' + $scope.selectedSubject.symbol)
+			ASG.getCourses($scope.term, $scope.selectedSubject.symbol)
 			.success(function(data){
 				console.log("GET");
 				$scope.courses = data;

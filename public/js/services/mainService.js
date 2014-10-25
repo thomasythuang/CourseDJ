@@ -2,39 +2,15 @@
 
 var app = angular.module('mainService', []);
 
-app.factory('Images', function($http){
-	return{
-		get: function(){
-			return $http.get('/images');
-		},
-		delete: function(imgId){
-			return $http.delete('/images/' + imgId);
-		},
-		addFav: function(img){
-			return $http.put('/images/favorites/add', img);
-		},
-		rmvFav: function(img){
-			return $http.put('/images/favorites/remove', img);
-		},
-		update: function(formData){
-			return $http.put('/images/edit', formData);
-		},
-	}
-});
+app.factory('ASG', function($http){
 
-app.factory('Users', function($http){
+	var NOT_A_KEY = "a3iSOsJ77pgC8BnX"
 	return{
-		profInfo: function(){
-			return $http.get('/profile/info');
+		getSubjects: function(){
+			return $http.get('http://api.asg.northwestern.edu/subjects/?key=' + NOT_A_KEY);
 		},
-		userInfo: function(userId){
-			return $http.get('/users/info/' + userId);
-		},
-		deleteUpload: function(imgId){
-			return $http.delete('/users/uploads/' + imgId);
-		},
-		reset: function(){
-			return $http.post('/users/reset');
-		},
+		getCourses: function(term, subject){
+			return $http.get('http://api.asg.northwestern.edu/courses/?key=' + NOT_A_KEY + '&term=' + term + '&subject=' + subject);
+		}
 	}
 });
