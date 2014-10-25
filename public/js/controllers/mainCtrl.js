@@ -7,6 +7,7 @@ var app = angular.module('mainController', []);
 app.controller('mainController', function($scope, $http){
 	$scope.loaded = false;
 	$scope.term = 4530;
+	$scope.setList = [];
 
 	var params = {
 		key: 'a3iSOsJ77pgC8BnX'
@@ -14,6 +15,7 @@ app.controller('mainController', function($scope, $http){
 	
 	$http.get('http://api.asg.northwestern.edu/subjects/?key=a3iSOsJ77pgC8BnX')
 		.success(function(data){
+			console.log("GET");
 			//console.log(data);
 			$scope.subjects = data;
 			$scope.loaded = true;
@@ -27,6 +29,7 @@ app.controller('mainController', function($scope, $http){
 		if ($scope.loaded){
 			$http.get('http://api.asg.northwestern.edu/courses/?key=a3iSOsJ77pgC8BnX&term=' + $scope.term + '&subject=' + $scope.selectedSubject)
 			.success(function(data){
+				console.log("GET");
 				//console.log(data);
 				$scope.courses = data;
 			})
@@ -34,6 +37,11 @@ app.controller('mainController', function($scope, $http){
 				console.log(err);
 			});
 		}
+	});
+
+	$scope.$watch('selectedCourse', function(course){
+		$scope.setList.push(course);
+		console.log($scope.setList);
 	});
 
 	$scope.events = [
