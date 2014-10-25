@@ -10,6 +10,7 @@ app.controller('mainController', function($scope, $http){
 	$scope.setList = [];
 	$scope.events = [];
 	
+	// GET a list of subjects 
 	$http.get('http://api.asg.northwestern.edu/subjects/?key=a3iSOsJ77pgC8BnX')
 		.success(function(data){
 			console.log("GET");
@@ -22,6 +23,7 @@ app.controller('mainController', function($scope, $http){
 			$scope.loaded = true;
 		});
 
+	// When a subject is selected, GET all the courses for that given subject
 	$scope.$watch('selectedSubject', function(){
 		if ($scope.loaded){
 			$http.get('http://api.asg.northwestern.edu/courses/?key=a3iSOsJ77pgC8BnX&term=' + $scope.term + '&subject=' + $scope.selectedSubject.symbol)
@@ -36,6 +38,7 @@ app.controller('mainController', function($scope, $http){
 		}
 	});
 
+	// Add a course to the list of selected courses
 	$scope.addToSetList = function(course){
 		var i = arrayContains($scope.setList, course);
 		if (i === false){
@@ -44,6 +47,7 @@ app.controller('mainController', function($scope, $http){
 		}
 	}
 
+	// Remove a course from the list of selected courses
 	$scope.removeFromSetList = function(course){
 		var i = arrayContains($scope.setList, course);
 		if (i !== false){
@@ -53,6 +57,7 @@ app.controller('mainController', function($scope, $http){
 
 	$scope.remix = function(){
 		$scope.events = [];
+		$scope.chosenDates = $scope.scramble();
 		for (var i=0; i<$scope.setList.length; i++){
 			var title = $scope.setList[i].subject + " " + $scope.setList[i].catalog_num
 			var days = parseDays($scope.setList[i].meeting_days);
@@ -65,26 +70,12 @@ app.controller('mainController', function($scope, $http){
 			}
 		}
 	}
-	/*
-	$scope.events = [
-    { id:1, text:"Task A-12458",
-      start_date: new Date(2014, 03, 24, 9, 0),
-      end_date: new Date(2014, 03, 24, 16, 0) },
-    { id:2, text:"Task A-83473",
-      start_date: new Date(2014, 03, 22, 9, 0),
-      end_date: new Date(2014, 03, 22, 16, 0) }
-  ]; */
-  /*
-  $scope.test = function(){
-  	console.log("test");
-  	$scope.events.push({
-  		id: 1, 
-  		text: "corn",
-  		start_date: new Date(2014, 03, 24, 9, 0),
-  		end_date: new Date(2014, 03, 24, 16, 0),
-		})
-  } */
 
+	$scope.scramble = function(){
+		
+	}
+
+	// take a string "MoWeFr" and returns an array of the dates ["Mo", "We", "Fr"]
   function parseDays(str){
   	var days = [];
   	var length = str.length;
@@ -94,6 +85,7 @@ app.controller('mainController', function($scope, $http){
   	return days;
   }
 
+  // Check if an object is in an array, return index of the object if true
   function arrayContains(arr, obj){
   	for (var i=0; i < arr.length; i++){
   		if (arr[i] == obj){
@@ -103,6 +95,7 @@ app.controller('mainController', function($scope, $http){
   	return false;
   }
 
+  // Return a date object in the week of 4/20/2014 based on a string input
   function makeDate(dayString, time){
   	var hour = time.substring(0, 2);
   	var min = time.substring(3, 5);
