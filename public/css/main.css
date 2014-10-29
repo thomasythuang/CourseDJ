@@ -47,8 +47,8 @@ body{
 
 
 
-.class-add.panel.panel-default.panel-full{
-  width: 355px;
+.class-add.panel.panel-default{
+  width: 330px;
 }
 
 .red{
@@ -65,6 +65,20 @@ body{
 .class-count{
   margin-bottom: 20px;
   margin-top: 20px;
+}
+
+.footer{
+  padding-top: 30px;
+  text-align: center;
+
+}
+
+.footer a{
+  color: #ffffff;
+}
+
+.footer p{
+  color:#F5EFD8;
 }
 
 /* //// CALENDAR //// */
