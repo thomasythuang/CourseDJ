@@ -44,8 +44,9 @@ app.controller('mainController', function($scope, $http, ASG){
 		var i = arrayContains($scope.setList, course);
 		if (i === false){
 			course.priority = 1;
+			hasFullInfo(course);
 			$scope.setList.push(course);
-			//console.log($scope.setList);
+			console.log(course);
 		}
 		$scope.selectedCourse = false;
 	}
@@ -123,6 +124,21 @@ app.controller('mainController', function($scope, $http, ASG){
   	return days;
   }
 
+  // Check if two courses share days with each other (for calculating conflicts)
+  function shareDays(course1, course2){
+  	var days1 = parseDays(course1.meeting_days);
+  	var days2 = parseDays(course2.meeting_days);
+  	for (var i=0; i < days1.length; i++){
+  		for (var j=0; j < days2.length; j++){
+  			if (days1[i] == days2[j]){
+  				return true; // Return true if a shared day exists
+  			}
+  		}
+  	}
+
+  	return false; // Else return false
+  }
+
   // Check if an object is in an array, return index of the object if true
   function arrayContains(arr, obj){
   	for (var i=0; i < arr.length; i++){
@@ -159,10 +175,18 @@ app.controller('mainController', function($scope, $http, ASG){
 
   // Calculate if two courses conflict
   function conflicted(course1, course2){
-  	return (course1.start_time <= course2.end_time && course1.start_time >= course2.start_time ||
+  	return (shareDays(course1, course2) && (course1.start_time <= course2.end_time && course1.start_time >= course2.start_time ||
 	    course2.start_time <= course1.end_time && course2.start_time >= course1.start_time ||
 	    course1.start_time <= course2.start_time && course1.end_time >= course2.end_time ||
-	    course2.start_time <= course1.start_time && course2.end_time >= course1.end_time);
+	    course2.start_time <= course1.start_time && course2.end_time >= course1.end_time));
+  }
+
+  // Checks if a given course has specific fields defined or not
+  function hasFullInfo(course){
+  	if (course.meeting_days == null || course.start_time == null || course.end_time == null){
+  		course.incompleteInfo = true;
+  		alert("Careful! The course you just added has incomplete information from the registrar and will be unable to be displayed. You may want to remove this course from your Classes Added to not throw off your results.");
+  	}
   }
 
 });
