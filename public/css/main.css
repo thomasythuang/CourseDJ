@@ -7,7 +7,7 @@ html, body{
 
 body{
   background-image: url('/img/dj2.jpg');
-  
+  font-family: "Roboto", sans-serif !important;
   padding-left: 1em;
   padding-right: 1em;
   font-size: 14px !important;
@@ -24,7 +24,6 @@ body{
 }
 .title{
   font-size: 4em;
-  font-family: "Arvo", serif !important;
 }
 
 /* //// MAIN BODY //// */
@@ -41,12 +40,10 @@ body{
 
 .form-title{
   font-size: 20px;
-  font-family: "Arvo", serif !important;
 }
 
 .add-title{
   font-size: 18px;
-  font-family: "Arvo", serif !important;
 }
 
 
