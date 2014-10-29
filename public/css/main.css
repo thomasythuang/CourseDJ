@@ -7,7 +7,7 @@ html, body{
 
 body{
   background-image: url('/img/dj2.jpg');
-  font-family: "Arvo", serif !important;
+  
   padding-left: 1em;
   padding-right: 1em;
   font-size: 14px !important;
@@ -17,12 +17,14 @@ body{
 /* //// HEADER AND NAVBAR //// */
 .header{
   color: white;
+  font-family: "Arvo", serif !important;
 }
 .header img{
   margin-top: -1.75em;
 }
 .title{
   font-size: 4em;
+  font-family: "Arvo", serif !important;
 }
 
 /* //// MAIN BODY //// */
@@ -48,11 +50,15 @@ body{
 
 
 .class-add.panel.panel-default{
-  width: 330px;
+
 }
 
 .subject{
-  max-width:271px;
+
+}
+
+.subject select{
+  max-width: 100%;
 }
 
 .red{
