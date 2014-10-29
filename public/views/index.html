@@ -49,7 +49,7 @@
 					<div ng-show="selectedSubject"><div>Course</div>
 					
 
-					<select ng-model="selectedCourse" ng-options="course.title for course in courses"></select></div>
+					<select ng-model="selectedCourse" ng-options="course.subject + ' ' + course.catalog_num + ': ' + course.title for course in courses"></select></div>
 				</div>
 
 

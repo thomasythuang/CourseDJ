@@ -50,11 +50,15 @@ body{
 
 
 .class-add.panel.panel-default{
-  width: 330px;
+
 }
 
 .subject{
-  max-width:271px;
+
+}
+
+.subject select{
+  max-width: 100%;
 }
 
 .red{
