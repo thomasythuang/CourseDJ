@@ -185,7 +185,7 @@ app.controller('mainController', function($scope, $http, ASG){
   function hasFullInfo(course){
   	if (course.meeting_days == null || course.start_time == null || course.end_time == null){
   		course.incompleteInfo = true;
-  		alert("Careful! The course you just added has incomplete information from the registrar and will be unable to be displayed. You may want to remove this course from your Classes Added to not throw off your results.");
+  		alert("Careful! The course you just added has incomplete information from the registrar and will be unable to be displayed until November 11. Until then, you may want to remove this course from your Classes Added to not throw off your results.");
   	}
   }
 

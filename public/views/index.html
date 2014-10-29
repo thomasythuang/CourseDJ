@@ -44,7 +44,7 @@
 					<div>Subject</div>
 					<select ng-model="selectedSubject" ng-options="subject.name for subject in subjects" class="selected-sub"></select>
 					<div ng-show="selectedSubject"><div>Course</div>
-					<select ng-model="selectedCourse" ng-options="course.title for course in courses"></select></div>
+					<select ng-model="selectedCourse" ng-options="course.subject + course.catalog_num + ': ' + course.title for course in courses"></select></div>
 
 					<div class="selected-course" ng-show="selectedCourse">{{selectedCourse.subject}} {{selectedCourse.catalog_num}}: {{selectedCourse.title}}</div>
 					<button class="add" ng-show="selectedCourse" ng-click="addToSetList(selectedCourse)">Add!</button>
