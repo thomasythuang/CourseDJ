@@ -51,6 +51,10 @@ body{
   width: 330px;
 }
 
+.subject{
+  max-width:271px;
+}
+
 .red{
   color:#ff0000;
 }
