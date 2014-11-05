@@ -25,9 +25,9 @@
 		<span>Scheduling, simplified</span>
 	</div>
 
-	<!-- <main-navbar></main-navbar> -->
-
 	<div class="row" id="body" ng-show="loaded">
+
+		<!-- Class Selection Column -->
 		<div class="col-sm-4 col-lg-3" id="form">
 			<div class="class-add panel panel-default">
 				<div class="panel-heading form-title">
@@ -42,22 +42,19 @@
 					</select>
 					<div>Subject</div>
 					<div class="subject">
-
-					<select ng-model="selectedSubject" ng-options="subject.name for subject in subjects" class="selected-sub"></select>
-					
+						<select ng-model="selectedSubject" ng-options="subject.name for subject in subjects" class="selected-sub"></select>
+					</div>
+						
 					<div ng-show="selectedSubject"><div>Course</div>
-					
-
-					<select ng-model="selectedCourse" ng-options="course.subject + ' ' + course.catalog_num + ': ' + course.title for course in courses"></select></div>
-				</div>
-
-
+						<span ng-show="!coursesLoaded" class="fa fa-spinner fa-spin"></span>
+						<select ng-hide="!coursesLoaded || isEmptyArray(courses)" ng-model="selectedCourse" ng-options="course.subject + ' ' + course.catalog_num + ': ' + course.title for course in courses"></select>
+						<div ng-show="coursesLoaded && isEmptyArray(courses)">There are no available classes in that subject. Try choosing another subject!</div>
+					</div>
 
 					<div class="selected-course" ng-show="selectedCourse">{{selectedCourse.subject}} {{selectedCourse.catalog_num}}: {{selectedCourse.title}}</div>
 					<button class="add" ng-show="selectedCourse" ng-click="addToSetList(selectedCourse)">Add!</button>
 				</div>
 			</div>
-
 
 			<div class="class-add panel panel-default">
 				<div class="panel-heading form-title">
@@ -88,8 +85,9 @@
 
 				</div>
 			</div>
-		</div>
+		</div> <!-- Class Selection Column -->
 
+		<!-- Calendar Column -->
 		<div class="col-sm-8 col-lg-9" id="cal">
 			<div class="panel panel-default panel-full">
 				<div class="panel-body panel-full">
@@ -104,10 +102,10 @@
 </div>
 
 
-<div class="footer">
-		<a href="mailto:asg-services@u.northwestern.edu?Subject=CourseDJ">Questions, concerns, or compliments? <br> Send us an email!</a>
-		<p>&copy; 2014 ASG Services</p>
-	</div>
+<div class="footer" ng-show="loaded">
+	<a href="mailto:asg-services@u.northwestern.edu?Subject=CourseDJ">Questions, concerns, or compliments? <br> Send us an email!</a>
+	<p>&copy; 2014 ASG Services</p>
+</div>
 	
 <!-- Resources -->
 

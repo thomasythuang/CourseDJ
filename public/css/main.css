@@ -76,17 +76,17 @@ body{
   margin-top: 20px;
 }
 
+/* //// FOOTER //// */
 .footer{
   padding-top: 30px;
   text-align: center;
-  font-family: "Arvo", serif !important;
-
 }
-
 .footer a{
   color: #ffffff;
 }
-
+.footer a:hover{
+  color: #ffffff;
+}
 .footer p{
   color:#F5EFD8;
 }

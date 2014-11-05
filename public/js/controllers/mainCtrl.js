@@ -6,6 +6,7 @@ var app = angular.module('mainController', []);
 
 app.controller('mainController', function($scope, $http, ASG){
 	$scope.loaded = false;
+	$scope.coursesLoaded = true;
 	$scope.term = 4530;
 	$scope.setList = [];
 	$scope.events = [];
@@ -27,14 +28,19 @@ app.controller('mainController', function($scope, $http, ASG){
 
 	// When a subject is selected, GET all the courses for that given subject
 	$scope.$watch('selectedSubject', function(){
+		$scope.selectedCourse = {};
 		if ($scope.loaded){
+			$scope.coursesLoaded = false;
 			ASG.getCourses($scope.term, $scope.selectedSubject.symbol)
 			.success(function(data){
 				console.log("GET");
 				$scope.courses = data;
+				$scope.coursesLoaded = true;
 			})
 			.error(function(err){
 				console.log(err);
+				$scope.courses = [];
+				$scope.coursesLoaded = true;
 			});
 		}
 	});
@@ -49,7 +55,7 @@ app.controller('mainController', function($scope, $http, ASG){
 			console.log(course);
 		}
 		$scope.selectedCourse = false;
-	}
+	};
 
 	// Remove a course from the list of selected courses
 	$scope.removeFromSetList = function(course){
@@ -57,7 +63,12 @@ app.controller('mainController', function($scope, $http, ASG){
 		if (i !== false){
 			$scope.setList.splice(i, 1);
 		}
-	}
+	};
+
+	// Check if an array is empty
+	$scope.isEmptyArray = function(arr){
+		return (arr == undefined || arr.length < 1);
+	};
 
 	// Process the selected courses and display the results
 	$scope.remix = function(){
@@ -82,7 +93,7 @@ app.controller('mainController', function($scope, $http, ASG){
 
 		if ($scope.conflict)
 			alert("Careful! Two or more of your mandatory courses conflict");
-	}
+	};
 
 	// Mix the list of selected courses and limit them to a specified amount
 	function scramble(arr){
