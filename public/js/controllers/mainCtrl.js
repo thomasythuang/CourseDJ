@@ -28,7 +28,7 @@ app.controller('mainController', function($scope, $http, ASG){
 
 	// When a subject is selected, GET all the courses for that given subject
 	$scope.$watch('selectedSubject', function(){
-		$scope.selectedCourse = {};
+		$scope.selectedCourse = false;
 		if ($scope.loaded){
 			$scope.coursesLoaded = false;
 			ASG.getCourses($scope.term, $scope.selectedSubject.symbol)
